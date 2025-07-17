@@ -33,9 +33,9 @@ Welcome to **EduMatrix**, a full-stack web application designed to streamline st
 
 ## 🛠️ Tech Stack
 
-| Frontend   | Backend             | Database          | Authentication       | Hosting        |
-|------------|---------------------|-------------------|-----------------------|----------------|
-| React.js   | Node.js + Express.js| MongoDB (Mongoose)| JWT (JSON Web Token)  | *(Add deployed URL here)* |
+| Frontend   | Backend             | Database          |
+|------------|---------------------|-------------------|
+| React.js   | Node.js + Express.js| MongoDB (Mongoose)|
 
 ---
 
