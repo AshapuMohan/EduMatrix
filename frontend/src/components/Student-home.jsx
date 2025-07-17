@@ -43,7 +43,7 @@ const Main = () => {
             <h2 className="mt-4 text-lg font-semibold text-center">{course.title}</h2>
             <p className="mt-2 text-gray-600 text-center text-sm">{course.description}</p>
             <a href={course.link} className="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded shadow text-center">
-              Enroll Now
+              Explore Now
             </a>
           </div>
         ))}
