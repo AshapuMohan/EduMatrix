@@ -19,46 +19,47 @@ Welcome to **EduMatrix**, a full-stack web application designed to streamline st
 
 ---
 
+## 🖥️ Project Presentation
+
+▶️ [Click to View Presentation](https://docs.google.com/presentation/d/1cSYKzJb_yFASkMsoloyC-Qr48k2eZFkh/edit?usp=drive_link&ouid=108389067766850490125&rtpof=true&sd=true)
+
+---
+
+## 📝 Project Report
+
+▶️ [Click to View Report](https://docs.google.com/document/d/15AwbYFmBqtIEYQQiaqcnefG4gCRXcUeb/edit?usp=drive_link&ouid=108389067766850490125&rtpof=true&sd=true)
+
+---
+
 ## 🛠️ Tech Stack
 
-| Frontend  | Backend             | Database         | Authentication     | Hosting        |
-|-----------|---------------------|------------------|---------------------|----------------|
-| React.js  | Node.js + Express.js | MongoDB (Mongoose) | JWT (JSON Web Token) | (Add deployed URL here) |
+| Frontend   | Backend             | Database          | Authentication       | Hosting        |
+|------------|---------------------|-------------------|-----------------------|----------------|
+| React.js   | Node.js + Express.js| MongoDB (Mongoose)| JWT (JSON Web Token)  | *(Add deployed URL here)* |
 
 ---
 
 ## 📌 Key Features
 
 ### 👨‍🎓 Student Module
-- Register and log in securely.
-- View assigned tasks with deadlines.
-- Upload submissions (links/files).
-- Track task scores and feedback.
+- Register and log in securely
+- View the content and learn from it of what they need
 
-### 🧑‍🏫 Mentor Module
-- Login with secure credentials.
-- View and evaluate student task submissions.
-- Assign scores and comments.
-- Track individual student performance.
-
----
-
-## 🧪 Functionalities
-
-- 🔐 Secure JWT-based Authentication.
-- 📝 Task CRUD operations for mentors.
-- 📁 GitHub link/file-based submissions by students.
-- 📊 Scoreboard system for mentor evaluations.
-- 💬 Feedback system integrated with submissions.
+### 🧑‍🏫 Teacher Module
+- Login with secure credentials
+- Add new courses or upload content to the old modules 
 
 ---
 
 ## 💻 Local Setup Instructions
 
 ### 📦 Prerequisites
+
 - Node.js and npm
-- MongoDB Atlas or local MongoDB
+- MongoDB (local or Atlas)
 - Git
+
+---
 
 ### 🧩 Clone the Repository
 
