@@ -32,6 +32,7 @@ Welcome to **EduMatrix**, a full-stack web application designed to streamline st
 ---
 ## Screenshots
 [Student dashboard](https://drive.google.com/file/d/1EX6lmVYPBpVD9IpmaAM32aL0xbxRHCHt/view?usp=drive_link)
+|------------------------------------------------------------------------------------------------------|
 [Home Page](https://drive.google.com/file/d/1-Pt2BrYJTJP-HmeUvph54tK1bLa2RWNh/view?usp=drive_link)
 
 ## 🛠️ Tech Stack
