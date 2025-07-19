@@ -33,11 +33,11 @@ Welcome to **EduMatrix**, a full-stack web application designed to streamline st
 ## Screenshots
 
 [Login Page](https://drive.google.com/file/d/1eIGIBt_UJESeyT_QUECVkoWNNoySWOYm/view?usp=drive_link)
-|------------------------------------------------------------------------------------------------------|
+
 [Student dashboard](https://drive.google.com/file/d/1EX6lmVYPBpVD9IpmaAM32aL0xbxRHCHt/view?usp=drive_link)
-|------------------------------------------------------------------------------------------------------|
+
 [Home Page](https://drive.google.com/file/d/1-Pt2BrYJTJP-HmeUvph54tK1bLa2RWNh/view?usp=drive_link)
-|------------------------------------------------------------------------------------------------------|
+
 [Course exploring](https://drive.google.com/file/d/1aPS0CqhrdSBGa7pYZ09lvkOFE76FMpzp/view?usp=drive_link)
 
 ---
