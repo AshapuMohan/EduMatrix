@@ -10,12 +10,6 @@ const Signup = () => {
   const [ConpassText, setConpassText] = useState("");
   const [RoleText, setRoleText] = useState("student");
 
-  const handleNameChange = (e) => setNameText(e.target.value);
-  const handleEmailChange = (e) => setEmailText(e.target.value);
-  const handlePasswordChange = (e) => setPassText(e.target.value);
-  const handleConfirmPasswordChange = (e) => setConpassText(e.target.value);
-  const handleRoleChange = (e) => setRoleText(e.target.value);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -23,36 +17,25 @@ const Signup = () => {
       alert('Passwords do not match');
       return;
     }
-
     if (PassText.length < 6) {
       alert('Password must be at least 6 characters long');
       return;
     }
 
     try {
-      // const response = await axios.post('http://localhost:5000/signup', {
-      //   name: NameText,
-      //   email: EmailText,
-      //   password: PassText,
-      //   role: RoleText
-      // });
       const response = await axios.post(`https://edu-matrix-back.vercel.app/signup`, {
         name: NameText,
         email: EmailText,
         password: PassText,
         role: RoleText
       });
-      
-      if (response.status === 201) {
+
+      if (response.status === 200 || response.status === 201) {
         alert('Signup successful');
         navigate('/');
       }
     } catch (error) {
-      if (error.response && error.response.data.message) {
-        alert(error.response.data.message);
-      } else {
-        alert('Signup failed. Please try again.');
-      }
+      alert(error?.response?.data?.message || 'Signup failed. Please try again.');
       console.error('Signup error:', error);
     }
   };
@@ -63,27 +46,29 @@ const Signup = () => {
       <form className='max-w-md mx-auto mt-5' onSubmit={handleSubmit}>
         <div className='mb-4'>
           <label className='block text-sm font-medium mb-2' htmlFor='role'>Role</label>
-          <select id='role' className='w-full px-3 py-2 border border-gray-300 rounded mb-4' onChange={handleRoleChange} value={RoleText}>
+          <select id='role' className='w-full px-3 py-2 border border-gray-300 rounded mb-4' value={RoleText} onChange={(e) => setRoleText(e.target.value)}>
             <option value='student'>Student</option>
             <option value='teacher'>Teacher</option>
             <option value='admin'>Admin</option>
           </select>
 
           <label className='block text-sm font-medium mb-2' htmlFor='name'>Name</label>
-          <input type='text' id='name' className='w-full px-3 py-2 border border-gray-300 rounded mb-4' onChange={handleNameChange} value={NameText} required />
+          <input type='text' id='name' className='w-full px-3 py-2 border border-gray-300 rounded mb-4' value={NameText} onChange={(e) => setNameText(e.target.value)} required />
 
           <label className='block text-sm font-medium mb-2' htmlFor='email'>Email</label>
-          <input type='email' id='email' className='w-full px-3 py-2 border border-gray-300 rounded' onChange={handleEmailChange} value={EmailText} required />
+          <input type='email' id='email' className='w-full px-3 py-2 border border-gray-300 rounded' value={EmailText} onChange={(e) => setEmailText(e.target.value)} required />
 
           <label className='block text-sm font-medium mb-2 mt-4' htmlFor='password'>Password</label>
-          <input type='password' id='password' className='w-full px-3 py-2 border border-gray-300 rounded' onChange={handlePasswordChange} value={PassText} required />
+          <input type='password' id='password' className='w-full px-3 py-2 border border-gray-300 rounded' value={PassText} onChange={(e) => setPassText(e.target.value)} required />
 
           <label className='block text-sm font-medium mb-2 mt-4' htmlFor='confirmPassword'>Confirm Password</label>
-          <input type='password' id='confirmPassword' className='w-full px-3 py-2 border border-gray-300 rounded' onChange={handleConfirmPasswordChange} value={ConpassText} required />
+          <input type='password' id='confirmPassword' className='w-full px-3 py-2 border border-gray-300 rounded' value={ConpassText} onChange={(e) => setConpassText(e.target.value)} required />
 
           <button type='submit' className='w-full bg-blue-500 text-white px-4 py-2 mt-4 rounded'>Signup</button>
         </div>
-        <p className='text-center mt-4'>Already have an account? <a href='/' className='text-blue-500 font-bold'>Login</a></p>
+        <p className='text-center mt-4'>Already have an account? 
+          <button type="button" onClick={() => navigate('/')} className='text-blue-500 font-bold ml-1'>Login</button>
+        </p>
       </form>
     </div>
   );
