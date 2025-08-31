@@ -11,6 +11,17 @@ const courseRoutes = require('./routes/courseRoutes');
 const app = express();
 const PORT = 5000;
 
+const cors = require('cors');
+
+const allowedOrigins = [
+  'https://edu-matrix-pied.vercel.app',
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
+
 // Connect to MongoDB
 connectDB();
 
