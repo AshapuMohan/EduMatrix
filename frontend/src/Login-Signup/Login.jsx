@@ -18,12 +18,17 @@ const Login = () => {
         return;
     }
     try{
-    const response = await axios.post('http://localhost:5000/', {
+    // const response = await axios.post('http://localhost:5000/', {
+    //     email: EmailText,
+    //     password: PassText,
+    //     role: RoleText
+    // });
+    const response = await axios.post(`https://edu-matrix-back.vercel.app/`, {
         email: EmailText,
         password: PassText,
         role: RoleText
     });
-
+    
     const { token, role, email, name } = response.data;
     localStorage.setItem('token', token);
     localStorage.setItem('role', role);
