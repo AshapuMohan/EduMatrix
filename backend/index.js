@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
 const connectDB = require('./config/db');
 const User = require('./models/User');
@@ -9,30 +10,31 @@ const courseRoutes = require('./routes/courseRoutes');
 
 const app = express();
 
-const cors = require('cors');
-
-// Connect to MongoDB
+// 🔹 Connect to MongoDB
 connectDB();
 
-// Middleware
+// 🔹 Allowed Frontend Origins
 const allowedOrigins = ['https://edu-matrix-pied.vercel.app'];
 
+// 🔹 CORS Setup
 app.use(cors({
-  origin: function (origin, callback) {
+  origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error('CORS not allowed'));
     }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
-app.options('*', cors());
+app.options('*', cors()); // Handle preflight
+
+// 🔹 Middleware
 app.use(express.json());
 
-// Welcome route
+// 🔹 Routes
 app.get('/', (req, res) => {
   res.send('🎉 Welcome to the EduMatrix API!');
 });
@@ -40,7 +42,7 @@ app.get('/', (req, res) => {
 // Course routes
 app.use('/courses', courseRoutes);
 
-// Get all users (excluding passwords)
+// Get all users
 app.get('/users', async (req, res) => {
   try {
     const users = await User.find().select('-password');
@@ -51,22 +53,21 @@ app.get('/users', async (req, res) => {
   }
 });
 
-// DELETE /users/:id - Delete user by ID
+// Delete a user by ID
 app.delete('/users/:id', async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
     if (!deletedUser) {
       return res.status(404).json({ message: 'User not found' });
     }
-    return res.status(200).json({ message: 'User deleted successfully' });
+    res.status(200).json({ message: 'User deleted successfully' });
   } catch (err) {
     console.error('Error deleting user:', err);
-    return res.status(500).json({ message: 'Server error while deleting user' });
+    res.status(500).json({ message: 'Server error while deleting user' });
   }
 });
 
-
-// Signup route
+// Signup
 app.post('/signup', async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
@@ -77,13 +78,7 @@ app.post('/signup', async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newUser = new User({
-      name,
-      email,
-      password: hashedPassword,
-      role,
-    });
+    const newUser = new User({ name, email, password: hashedPassword, role });
 
     await newUser.save();
     res.status(201).json({ message: 'User created successfully' });
@@ -93,8 +88,8 @@ app.post('/signup', async (req, res) => {
   }
 });
 
-// Login route
-app.post('/', async (req, res) => {
+// Login
+app.post('/login', async (req, res) => {
   try {
     const { email, password, role } = req.body;
 
@@ -108,9 +103,11 @@ app.post('/', async (req, res) => {
       return res.status(403).json({ message: 'Role mismatch' });
     }
 
-    const token = jwt.sign({ id: user._id, role: user.role }, 'your_jwt_secret', {
-      expiresIn: '2h',
-    });
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET || 'your_jwt_secret',
+      { expiresIn: '2h' }
+    );
 
     res.json({
       token,
@@ -124,11 +121,7 @@ app.post('/', async (req, res) => {
   }
 });
 
-// Start the server
-// app.listen(3000, () => {
-//   console.log(`🚀 Server running at http://localhost:${PORT}`);
-// });
-
+// 🔹 Local or Vercel Deployment
 if (require.main === module) {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
