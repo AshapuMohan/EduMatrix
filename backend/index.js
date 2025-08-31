@@ -8,7 +8,6 @@ const User = require('./models/User');
 const courseRoutes = require('./routes/courseRoutes');
 
 const app = express();
-const PORT = 5000;
 
 const cors = require('cors');
 
@@ -119,6 +118,6 @@ app.post('/', async (req, res) => {
 });
 
 // Start the server
-app.listen(PORT, () => {
+app.listen(3000, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
