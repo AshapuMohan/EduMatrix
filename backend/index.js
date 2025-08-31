@@ -12,20 +12,14 @@ const PORT = 5000;
 
 const cors = require('cors');
 
-const allowedOrigins = [
-  'https://edu-matrix-pied.vercel.app',
-];
-
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true,
-}));
-
 // Connect to MongoDB
 connectDB();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ['https://edu-matrix-pied.vercel.app'],
+  credentials: true
+}));
 app.use(express.json());
 
 // Welcome route
