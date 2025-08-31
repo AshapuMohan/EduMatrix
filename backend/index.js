@@ -16,10 +16,14 @@ const cors = require('cors');
 connectDB();
 
 // Middleware
-app.use(cors({
+const corsOptions = {
   origin: ['https://edu-matrix-pied.vercel.app'],
-  credentials: true
-}));
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+// Handle preflight requests for all routes
+app.options('*', cors(corsOptions));
 app.use(express.json());
 
 // Welcome route
