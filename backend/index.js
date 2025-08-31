@@ -15,13 +15,21 @@ const cors = require('cors');
 connectDB();
 
 // Middleware
-const corsOptions = {
-  origin: ['https://edu-matrix-pied.vercel.app'],
-  credentials: true,
-};
+const allowedOrigins = ['https://edu-matrix-pied.vercel.app'];
 
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+app.options('*', cors());
 app.use(express.json());
 
 // Welcome route
