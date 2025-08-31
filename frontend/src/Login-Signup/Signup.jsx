@@ -30,13 +30,19 @@ const Signup = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/signup', {
+      // const response = await axios.post('http://localhost:5000/signup', {
+      //   name: NameText,
+      //   email: EmailText,
+      //   password: PassText,
+      //   role: RoleText
+      // });
+      const response = await axios.post(`https://edu-matrix-back.vercel.app/signup`, {
         name: NameText,
         email: EmailText,
         password: PassText,
         role: RoleText
       });
-
+      
       if (response.status === 201) {
         alert('Signup successful');
         navigate('/');
